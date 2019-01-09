@@ -55,8 +55,8 @@ def menu(): # Defines function menu.
   '''
     
   print() # Prints blank space. 
-  print(Style.BRIGHT + Fore.BLUE + "1. " + Style.RESET_ALL + "Decode encrypted messages.") # Prints menu option #1, makes the option number blue.
-  print(Style.BRIGHT + Fore.BLUE + "2. "+ Style.RESET_ALL + "Encrypt messages.") # Prints menu option #2, makes the option number blue.
+  print(Style.BRIGHT + Fore.BLUE + "1. " + Style.RESET_ALL + "Encrypt messages..") # Prints menu option #1, makes the option number blue.
+  print(Style.BRIGHT + Fore.BLUE + "2. "+ Style.RESET_ALL + "Decode encrypted messages.") # Prints menu option #2, makes the option number blue.
   print(Style.BRIGHT + Fore.BLUE + "3. "+ Style.RESET_ALL + "Request backup/evacuation.") # Prints menu option #3, makes the option number blue.
   print(Style.BRIGHT + Fore.BLUE + "4. "+ Style.RESET_ALL + "Locate an IP Address.") # Prints menu option #4, makes the option number blue.
   print(Style.BRIGHT + Fore.BLUE + "5. "+ Style.RESET_ALL + "Detect financial fraud.") # Prints menu option #5, makes the option number blue.
@@ -78,11 +78,11 @@ def menu(): # Defines function menu.
    
     #- Menu Option #1 (Decode encrypted messages.).
   elif menuAsk == str('1'): # If the input for menuAsk is 1, the following code is executed.
-    unHex() # Calls the function unhex (converts Hexadecimal to ASCII)
+    asciiHex() # Calls the function unhex (converts Hexadecimal to ASCII)
     
     #- Menu Option #2 (Encrypt messages.)
   elif menuAsk == str('2'): # If the input for menuAsk is 2, the following code is executed.
-    asciiHex() # Calls the function asciiHex.
+    unHex() # Calls the function asciiHex.
     
     #- Menu Option #3 (Request backup/evacuation)
   elif menuAsk == str('3'): # If the input for menuAsk is 3, the following code is executed.
