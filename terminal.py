@@ -7,7 +7,7 @@
 #--- Imports
 from colorama import Fore, Style # Imports Fore and style from Colorama. Allows for colored text. (https://pypi.org/project/colorama/)
 import binascii # Imports Binascii module. Allows for conversion between number systems and ASCII. (https://docs.python.org/3.1/library/binascii.html)
-import replit # Imports Replit module, allows for clearing of text specificially with replit. (https://twitter.com/replit/status/994000599241895936)
+import sys
 import urllib.request # Imports Urllib.request module, allows for opening urls, reading the page source from urls amongst many other things. (https://docs.python.org/3/library/urllib.request.html#module-urllib.request)
 from termcolor import cprint # Imports cprint from the termcolor module. Allows for bolded, underlined and blinking text. (https://pypi.org/project/termcolor/)
 from math import radians, cos, sin, sqrt, atan2 # Imports radians, cos, sin, sqrt and atan2 from the math module (https://docs.python.org/3/library/math.html)
@@ -67,6 +67,7 @@ def menu(): # Defines function menu.
   print(Style.BRIGHT + Fore.BLUE + "3. "+ Style.RESET_ALL + "Request backup/evacuation.") # Prints menu option #3, makes the option number blue.
   print(Style.BRIGHT + Fore.BLUE + "4. "+ Style.RESET_ALL + "Locate an IP Address.") # Prints menu option #4, makes the option number blue.
   print(Style.BRIGHT + Fore.BLUE + "5. "+ Style.RESET_ALL + "Detect financial fraud.") # Prints menu option #5, makes the option number blue.
+  print(Style.BRIGHT + Fore.BLUE + "6. "+ Style.RESET_ALL + "Logout.")
   print(Style.BRIGHT + Fore.GREEN + "Note: "+ Style.RESET_ALL + 'If you select the wrong option, type menu in an input to return to the main menu.') # Prints menu option #6, makes the option number blue.
   print() # Prints blank space. 
   
@@ -103,6 +104,8 @@ def menu(): # Defines function menu.
   elif menuAsk == str('5'): # If the input for menu ask is 5, the following code is executed. 
     taxLaunder() # Calls the function taxLaunder
   
+  elif menuAsk == str('6'):
+    sys.exit()
   #assert isinstance(menuAsk, string), 'Expecting a string!'
     
   return menuAsk # Returns menuAsk (Causes function to exit).
