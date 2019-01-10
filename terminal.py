@@ -19,7 +19,7 @@ logging.basicConfig(filename='debug.txt', level=logging.DEBUG, format=' %(asctim
 
 logging.debug('Start of program.')
 #--- Launch Sequence
-logging.debug('Launch screen assignment.)
+logging.debug('Launch screen assignment.')
 launchScreen = ''' 
   ______ ____ _____             _____                                          _   _______                  _             _ 
  |  ____|  _ \_   _|           / ____|                                        | | |__   __|                (_)           | |
