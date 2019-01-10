@@ -82,8 +82,7 @@ def menu(): # Defines function menu.
    print() # Prints a blank space.
    print(launchScreen) # Prints the launch screen
    menu() # Calls the menu function. 
-   
-    logging.debug('Determining menu option selected.')
+   logging.debug('Determining menu option selected.')
     #- Menu Option #1 (Decode encrypted messages.).
   elif menuAsk == str('1'): # If the input for menuAsk is 1, the following code is executed.
     asciiHex() # Calls the function unhex (converts Hexadecimal to ASCII)
@@ -270,7 +269,7 @@ def backupEvac(): # Defines the function backupEvac
   '''
   
 # --- BACKUP
-logging.debug('Start of backup.')
+  logging.debug('Start of backup.')
   print(Style.BRIGHT + Fore.BLUE + '1. ' + Style.RESET_ALL + 'Request backup. ' ) # Prints menu option #1, makes the number blue.
   print(Style.BRIGHT + Fore.BLUE + '2. ' + Style.RESET_ALL + 'Request an evacuation. ' ) # Prints menu option #2, makes the number blue.
   print()
@@ -352,7 +351,7 @@ logging.debug('Start of backup.')
     print('Backup is on the way, ETA: ' + str(travelTime[0:5]) + ' Hours' ) # Prints the time estimated in hours till the backup arrives. 
 
 #--- EVACUATION
-logging.debug('Start of evacuation')
+  logging.debug('Start of evacuation')
   if backupAsk in str('2'): # If the user selects option #2 the following code is executed. 
   
    print() # Prints blank space.
