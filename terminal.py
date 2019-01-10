@@ -7,13 +7,19 @@
 #--- Imports
 from colorama import Fore, Style # Imports Fore and style from Colorama. Allows for colored text. (https://pypi.org/project/colorama/)
 import binascii # Imports Binascii module. Allows for conversion between number systems and ASCII. (https://docs.python.org/3.1/library/binascii.html)
-import replit # Imports Replit module, allows for clearing of text specificially with replit. (https://twitter.com/replit/status/994000599241895936)
+import sys
 import urllib.request # Imports Urllib.request module, allows for opening urls, reading the page source from urls amongst many other things. (https://docs.python.org/3/library/urllib.request.html#module-urllib.request)
 from termcolor import cprint # Imports cprint from the termcolor module. Allows for bolded, underlined and blinking text. (https://pypi.org/project/termcolor/)
 from math import radians, cos, sin, sqrt, atan2 # Imports radians, cos, sin, sqrt and atan2 from the math module (https://docs.python.org/3/library/math.html)
 import time # Imports time module. Allows for the delayed printing of text. (https://docs.python.org/3/library/time.html)
 
+#--- Logging
+import logging
+logging.basicConfig(filename='debug.txt', level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
+
+logging.debug('Start of program.')
 #--- Launch Sequence
+logging.debug('Launch screen assignment.')
 launchScreen = ''' 
   ______ ____ _____             _____                                          _   _______                  _             _ 
  |  ____|  _ \_   _|           / ____|                                        | | |__   __|                (_)           | |
@@ -25,7 +31,7 @@ launchScreen = '''
 '''
 # Assigns the launch screen header to the variable launchScreen.  
 
-
+logging.debug('Variable assignment')
 #--- Variable Assignment
 acceptableAgentNum = ['5','6','7','admin'] # Acceptable inputs for an agent number.
 acceptableDeptPass = ['9', '8','12','adminpass'] # Acceptable inputs for an department password. 
@@ -36,6 +42,7 @@ acceptableMenu = ['Menu', 'menu'] # Acceptable inputs, when any one of these are
 acceptableBackupMenu = ['1', '2']
 
 #--- Menu
+logging.debug('Start of function Menu.')
 def menu(): # Defines function menu. 
   '''
   A menu of options. 
@@ -53,13 +60,14 @@ def menu(): # Defines function menu.
   string 
     The input for menuAsk. 
   '''
-    
+  logging.debug('Displaying menu output.')
   print() # Prints blank space. 
   print(Style.BRIGHT + Fore.BLUE + "1. " + Style.RESET_ALL + "Encrypt messages..") # Prints menu option #1, makes the option number blue.
   print(Style.BRIGHT + Fore.BLUE + "2. "+ Style.RESET_ALL + "Decode encrypted messages.") # Prints menu option #2, makes the option number blue.
   print(Style.BRIGHT + Fore.BLUE + "3. "+ Style.RESET_ALL + "Request backup/evacuation.") # Prints menu option #3, makes the option number blue.
   print(Style.BRIGHT + Fore.BLUE + "4. "+ Style.RESET_ALL + "Locate an IP Address.") # Prints menu option #4, makes the option number blue.
   print(Style.BRIGHT + Fore.BLUE + "5. "+ Style.RESET_ALL + "Detect financial fraud.") # Prints menu option #5, makes the option number blue.
+  print(Style.BRIGHT + Fore.BLUE + "6. "+ Style.RESET_ALL + "Logout.")
   print(Style.BRIGHT + Fore.GREEN + "Note: "+ Style.RESET_ALL + 'If you select the wrong option, type menu in an input to return to the main menu.') # Prints menu option #6, makes the option number blue.
   print() # Prints blank space. 
   
@@ -75,7 +83,7 @@ def menu(): # Defines function menu.
    print() # Prints a blank space.
    print(launchScreen) # Prints the launch screen
    menu() # Calls the menu function. 
-   
+   logging.debug('Determining menu option selected.')
     #- Menu Option #1 (Decode encrypted messages.).
   elif menuAsk == str('1'): # If the input for menuAsk is 1, the following code is executed.
     asciiHex() # Calls the function unhex (converts Hexadecimal to ASCII)
@@ -96,12 +104,15 @@ def menu(): # Defines function menu.
   elif menuAsk == str('5'): # If the input for menu ask is 5, the following code is executed. 
     taxLaunder() # Calls the function taxLaunder
   
+  elif menuAsk == str('6'):
+    sys.exit()
   #assert isinstance(menuAsk, string), 'Expecting a string!'
     
   return menuAsk # Returns menuAsk (Causes function to exit).
 
 
 #--- Converts Hexadecimal to ASCII
+logging.debug('Start of function unHex')
 def unHex(): # Defines the function "unHex"
   '''
   Converts hexadecimal to ASCII. 
@@ -119,6 +130,7 @@ def unHex(): # Defines the function "unHex"
     The input for unHexMenu. 
   '''
   try: # The program will attempt to run this code, if an error message is given it will run the code under "except:"
+   logging.debug('Requesting user input.')
    hexInput = input("Please enter your encoded hex message:") # Prompts user for hexadecimal input.
    hexOutput = hexInput.replace(" ","") # Deletes spaces in the hexadecimal input to avoid error with decoding.
    hexToAscii = binascii.unhexlify(str(hexOutput)) # Takes the hexinput with deleted spaces (hexouput) and converts it to ASCII.
@@ -166,7 +178,8 @@ def unHex(): # Defines the function "unHex"
     menu() # Calls the menu funciton.
   return unHexMenu # Returns the function unHexMenu (Exits the function)
 
-#--- Converts ASCII to Hexadecimal
+#--- Converts ASCII to Hexadecima
+logging.debug('Start of asciiHex function.')
 def asciiHex(): # Defines the function asciiHex
   '''
   Converts ASCII to Hexadecimal.
@@ -184,7 +197,7 @@ def asciiHex(): # Defines the function asciiHex
     The input of asciiHexMenu
   '''
   try: # The program will attempt to run this code, if an error message is given it will run the code under "except:"
-  
+   logging.debug('Requesting user input.')
    asciiInput = input("Please enter the message you'd like to encrypt:") # Prompts user for ASCII input.
    #assert isinstance(asciiInput, str), 'Expecting string!'
    if asciiInput in acceptableMenu: # If the user types "Menu" or "menu" into asciiInput the following code will be executed.
@@ -195,7 +208,9 @@ def asciiHex(): # Defines the function asciiHex
      print() # Prints a blank space.
      print(launchScreen) # Prints the launch screen.
      menu() # Calls the menu function/
+              
    else: # If the user didn't type "Menu" or "menu" in asciiInput the following code is executed. 
+    logging.debug('Encoding input.')
     asciiOutput = asciiInput.encode('utf-8') # Encodes user's inputs to bytes such that the input can be used as a variable for binascii.hexlify.
     asciiToHex = binascii.hexlify(asciiOutput) # Converts the users encoded input to a hexadecimal.
     print('Your message has been encoded: ' + asciiToHex.decode('utf-8')) # Decodes the converted input (asciiToHex) to remove unwanted prefixes, prints it.
@@ -209,7 +224,7 @@ def asciiHex(): # Defines the function asciiHex
     print(launchScreen) # Prints the launch screen.
     unHex() # Calls the function unHex
   
-
+  logging.debug('Requesting menu return input.')
   asciiHexMenu = input('Would you like to go back to the main menu?: ') # Asks if the user would like to go back to the main menu. 
   #assert isinstance(asciiHexMenu, str), 'Expecting string!'
   if asciiHexMenu in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
@@ -236,7 +251,7 @@ def asciiHex(): # Defines the function asciiHex
   return asciiHexMenu # Returns the function unHexMenu (Exits the function)
 
 #--- Request backup/evacuation.
-
+logging.debug('Start of backup/evac function.')
 def backupEvac(): # Defines the function backupEvac
   '''
   Requests a backup or evacuation from FBI Headquarters..
@@ -257,6 +272,7 @@ def backupEvac(): # Defines the function backupEvac
   '''
   
 # --- BACKUP
+  logging.debug('Start of backup.')
   print(Style.BRIGHT + Fore.BLUE + '1. ' + Style.RESET_ALL + 'Request backup. ' ) # Prints menu option #1, makes the number blue.
   print(Style.BRIGHT + Fore.BLUE + '2. ' + Style.RESET_ALL + 'Request an evacuation. ' ) # Prints menu option #2, makes the number blue.
   print()
@@ -277,6 +293,7 @@ def backupEvac(): # Defines the function backupEvac
 
     print() # Prints blank space.
     cprint('Requesting Backup', attrs=['blink']) # Prints the requesting backup header, while blinking. 
+    logging.debug('Fetching ip location data from API.')
   
     for ipAddress in urllib.request.urlopen('https://ipapi.co/ip'): # Reads the page source of the url, grabs the IP Address of the user.
      ipAddressOutput = ipAddress.decode('utf-8') # Decodes the IP Address to avoid unwanted unwanted prefixes.
@@ -299,6 +316,7 @@ def backupEvac(): # Defines the function backupEvac
      longOutput = float(ipLatLongOutput[8:16]) # Seperates the longitude from the lattitude in the string and converts it to a float value.
   
   #--- Haversine Formula Pre-requisites. 
+    logging.debug('Defining variables for haversine formula.')
     R = 6371 # Radius of the Earth (KM).
     #assert R == 6371, 'Incorrect radius!'
     lat1 = radians(38.895370) # Lattitude for FBI Headquarters, converts value to a radian.
@@ -319,14 +337,13 @@ def backupEvac(): # Defines the function backupEvac
      
      Source: http://mathforum.org/library/drmath/view/51879.html (Explanation and demonstration of the Formula)
     '''
-
+    logging.debug('Executing haversine formula.')
     a = (sin(dlat/2))**2 + cos(lat1) * cos(lat2) * (sin(dlon/2))**2 # Straight line distance. 
     c = 2 * atan2(sqrt(a), sqrt(1-a)) # Great circle distance. 
     distance = R * c  # Total distance between the coordinates. 
     distanceOutput = str(R * c) # Converts the total distance to a string.
     travelTime = str(distance/100) # Determines the time in hours for backup to arrive, assuming the 'backup' is travelling 100 KM/h
     
-
     print() # Prints blank space. 
     print('IP Address: ' + ipAddressOutput) # Prints the user's decoded IP Address. 
     print() # Prtins blank space. 
@@ -337,10 +354,12 @@ def backupEvac(): # Defines the function backupEvac
     print('Backup is on the way, ETA: ' + str(travelTime[0:5]) + ' Hours' ) # Prints the time estimated in hours till the backup arrives. 
 
 #--- EVACUATION
+  logging.debug('Start of evacuation')
   if backupAsk in str('2'): # If the user selects option #2 the following code is executed. 
   
    print() # Prints blank space.
    cprint('Requesting Evacuation', attrs=['blink']) # Prints the requesting evacuation header, while blinking. 
+   logging.debug('Fetching ip location data from API')
 
    for ipAddress in urllib.request.urlopen('https://ipapi.co/ip'): # Reads the page source of the url, grabs the IP Address of the user.
     ipAddressOutput = ipAddress.decode('utf-8') # Decodes the IP Address to avoid unwanted unwanted prefixes.
@@ -363,6 +382,7 @@ def backupEvac(): # Defines the function backupEvac
     longOutput = float(ipLatLongOutput[8:16]) # Seperates the longitude from the lattitude in the string and converts it to a float value.
   
   #--- Haversine Formula Pre-requisites. 
+    logging.debug('Haversine formula variable assignment.')
     R = 6371 # Radius of the Earth (KM).
     #assert R == 6371, 'Incorrect radius!'
     lat1 = radians(38.895370) # Lattitude for FBI Headquarters, converts value to a radian.
@@ -383,7 +403,7 @@ def backupEvac(): # Defines the function backupEvac
      
      Source: http://mathforum.org/library/drmath/view/51879.html (Explanation and demonstration of the Formula)
     '''
-
+    logging.debug('Haversine formula variable execution.')
     a = (sin(dlat/2))**2 + cos(lat1) * cos(lat2) * (sin(dlon/2))**2 # Straight line distance. 
     c = 2 * atan2(sqrt(a), sqrt(1-a)) # Great circle distance. 
     distance = R * c  # Total distance between the coordinates. 
@@ -411,6 +431,7 @@ def backupEvac(): # Defines the function backupEvac
   print() # Prints a blank space. 
   
   #--- MENU RETURN
+  logging.debug('Requesting menu return input.')
   backupEvacMenu = input('Would you like to go back to the main menu?: ') # Asks if the user would like to go back to the main menu. 
   #assert isinstance(backupEvacMenu, str), 'Expecting string!'
   
@@ -440,7 +461,7 @@ def backupEvac(): # Defines the function backupEvac
   
   
 #--- Track an IP Address
-
+logging.debug('Start of function ip locate.')
 def ipLocate():
   '''
   Determines the geolocation of an IP Address.
@@ -457,12 +478,12 @@ def ipLocate():
   string
     The input of ipLocateMenu
   '''
-  
+  logging.debug('Requesting user for ip input.')
   ipLocateAsk = input("Please enter the IP Address you would like to locate: ") # Prompts the user to input an IP Address.
   #assert isinstance (ipLocateAsk, str), 'Expecting string!'
   
   try: # The program will attempt to run the following code, if an error is given the code under "except:"i will be executed.
-    
+   logging.debug('Fetching ip location data from API.')
    for ipCountry in urllib.request.urlopen('https://ipapi.co/' + ipLocateAsk + '/country_name'): # Reads the page source of the url, grabs the country of the ip address given. 
      ipCountryOutput = ipCountry.decode('utf-8') # Decodes the country name to avoid unwanted prefixes.
     
@@ -487,8 +508,7 @@ def ipLocate():
     replit.clear() # Clears the console.
     print(launchScreen) # Prints the launch screen.
     ipLocate() # Calls the function ipLocate
-  
-
+ 
   print() # Prints a blank space.
   cprint('Tracking IP Address...', attrs=['blink']) # Prints the requesting backup header, while blinking. 
   print() # Prints a blank space.
@@ -526,7 +546,7 @@ def ipLocate():
   
   
 #--- Detect financial fraud.
-
+logging.debug('Start of function taxEvade.')
 def taxEvade(netIncome, taxPaid, taxRate): # Defines the function taxEvade with the parameters netIncome and taxPaid
   '''
   Determines if tax evasion has occured. 
@@ -556,7 +576,7 @@ def taxEvade(netIncome, taxPaid, taxRate): # Defines the function taxEvade with 
   overTax = str(missingTax) # Assigns the string of missingTax to the variable overTax.
   overTaxOutput = overTax.replace('-', '') # Replaces the - in overTax, assigns new value to overTaxOutput
 
-
+  logging.debug('Determining tax status.')
   if taxPaid < taxPayConfirm: # If the amount of taxes paid, is less than the amount of taxes that should've been paid the following code is executed. 
     print() # Prints a blank space. 
     print(Style.BRIGHT + Fore.RED + 'Alert: ' + Style.RESET_ALL + 'Tax evasion has been detected '+ '$' + str(missingTax) + ' has not been paid.') # Prints an error message, along with the amount of taxes not paid. 
@@ -571,7 +591,7 @@ def taxEvade(netIncome, taxPaid, taxRate): # Defines the function taxEvade with 
   
   #assert taxRate <= 100, 'Expecting tax rate less than 100!'
 
-
+logging.debug('Start of function moneyLaunder.')
 def moneyLaunder(reportedNetIncome, revenue, expenses):  # Defines the function moneyLaunder with parameters reportedNetIncome, revenue and expenses.
   '''
   Determines if money laundering has occured. . 
@@ -599,7 +619,8 @@ def moneyLaunder(reportedNetIncome, revenue, expenses):  # Defines the function 
   incomeError = str(incomeOutput)
   incomeErrorOutput = incomeError.replace('-','')
   #assert isinstance (incomeErrorOutput, str), 'Expecting string!'
-
+  
+  logging.debug('Determining net income status.')
   if reportedNetIncome > netIncomeConfirm: # If the reported net income is greater then the actual net income the following code is executed.
     print() # Prints a blank space. 
     print(Style.BRIGHT + Fore.RED + 'Alert: ' + Style.RESET_ALL + 'Money laundering has been detected '+ '$' + str(incomeOutput) + ' were omitted from the financial statements.') # Prints an alert with the amount of money laundered. 
@@ -613,7 +634,7 @@ def moneyLaunder(reportedNetIncome, revenue, expenses):  # Defines the function 
     print(Style.BRIGHT + Fore.GREEN + 'Notification: '+ Style.RESET_ALL + 'No money laundering, $' + str(incomeErrorOutput) + 'has been omitted from the financial statements. ') # Prints a notification message with the amount 
 
 #--- Detect financial fraud menu.
-
+logging.debug('Start of function taxLaunder')
 def taxLaunder(): # Defines the function taxLaunder
   '''
   Displays a list of options. 
@@ -630,6 +651,7 @@ def taxLaunder(): # Defines the function taxLaunder
   taxLaunderMenu
     The input of taxLaunderMenu
   '''
+  logging.debug('Outputting financial fraud menu.')
   print(Style.BRIGHT + Fore.BLUE + '1. ' + Style.RESET_ALL + 'Detect tax evasion. ' ) # Prints menu option #1, makes the number blue.
   print(Style.BRIGHT + Fore.BLUE + '2. ' + Style.RESET_ALL + 'Detect money laundering. ' ) # Prints menu option #2, makes the number blue.
   
@@ -645,7 +667,8 @@ def taxLaunder(): # Defines the function taxLaunder
     print() # Prints a blank message.
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the menu function. 
-  
+              
+  logging.debug('Determining menu option selected.')
   if taxLaunderAsk == str('1'): # If the user selects option #1, the following code is executed.
     print() # Prints a blank space. 
     
@@ -715,7 +738,7 @@ def taxLaunder(): # Defines the function taxLaunder
   return taxLaunderMenu # Returns taxLaunderMenu (Exits the function)
   
 #--- Login Validator
-
+logging.debug('Start of function login.')
 def login():  # Defines the function login.
   '''
   Prompts the user to login. 
