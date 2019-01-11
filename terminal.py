@@ -5,14 +5,16 @@
                                     
                                     
 #--- Imports
-from colorama import Fore, Style # Imports Fore and style from Colorama. Allows for colored text. (https://pypi.org/project/colorama/)
+from colorama import init, Fore, Style # Imports Fore and style from Colorama. Allows for colored text. (https://pypi.org/project/colorama/)
 import binascii # Imports Binascii module. Allows for conversion between number systems and ASCII. (https://docs.python.org/3.1/library/binascii.html)
 import sys
+import replit
 import urllib.request # Imports Urllib.request module, allows for opening urls, reading the page source from urls amongst many other things. (https://docs.python.org/3/library/urllib.request.html#module-urllib.request)
 from termcolor import cprint # Imports cprint from the termcolor module. Allows for bolded, underlined and blinking text. (https://pypi.org/project/termcolor/)
 from math import radians, cos, sin, sqrt, atan2 # Imports radians, cos, sin, sqrt and atan2 from the math module (https://docs.python.org/3/library/math.html)
 import time # Imports time module. Allows for the delayed printing of text. (https://docs.python.org/3/library/time.html)
 
+init(convert=True)
 #--- Logging
 import logging
 logging.basicConfig(filename='debug.txt', level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
@@ -37,7 +39,7 @@ acceptableAgentNum = ['5','6','7','admin'] # Acceptable inputs for an agent numb
 acceptableDeptPass = ['9', '8','12','adminpass'] # Acceptable inputs for an department password. 
 acceptableReturnMenu = ['Yes', 'yes'] # Acceptable inputs when the user is asked if they want to return to the menu.
 remain = ['No','no'] # Acceptable inputs that will restart the function when the user is asked if they want to return to the menu. 
-acceptableMenuOptions = ['1','2','3','4','5'] # Acceptable inputs for the menu options.
+acceptableMenuOptions = ['1','2','3','4','5', '6'] # Acceptable inputs for the menu options.
 acceptableMenu = ['Menu', 'menu'] # Acceptable inputs, when any one of these are typed into a main input it will return the user back to the menu. 
 acceptableBackupMenu = ['1', '2']
 
