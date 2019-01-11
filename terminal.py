@@ -2,8 +2,7 @@
 ### LOGIN INFO FOR TESTING PURPOSES:
                                     # AGENT NUMBER: admin
                                     # Dept. Password: adminpass
-                                    
-                # test                    
+                                                      
 #--- Imports
 from colorama import init, Fore, Style # Imports Fore and style from Colorama. Allows for colored text. (https://pypi.org/project/colorama/)
 import binascii # Imports Binascii module. Allows for conversion between number systems and ASCII. (https://docs.python.org/3.1/library/binascii.html)
@@ -14,7 +13,7 @@ from termcolor import cprint # Imports cprint from the termcolor module. Allows 
 from math import radians, cos, sin, sqrt, atan2 # Imports radians, cos, sin, sqrt and atan2 from the math module (https://docs.python.org/3/library/math.html)
 import time # Imports time module. Allows for the delayed printing of text. (https://docs.python.org/3/library/time.html)
 
-init(convert=True)
+#init(convert=True)
 #--- Logging
 import logging
 logging.basicConfig(filename='debug.txt', level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
@@ -42,6 +41,8 @@ remain = ['No','no'] # Acceptable inputs that will restart the function when the
 acceptableMenuOptions = ['1','2','3','4','5', '6'] # Acceptable inputs for the menu options.
 acceptableMenu = ['Menu', 'menu'] # Acceptable inputs, when any one of these are typed into a main input it will return the user back to the menu. 
 acceptableBackupMenu = ['1', '2']
+
+failedAttempts = {'failed': 0}
 
 #--- Menu
 logging.debug('Start of function Menu.')
@@ -773,10 +774,17 @@ def login():  # Defines the function login.
     menu() # Calls the menu function.
     
   else: # If the inputted login information is not in the system, the following code is executed.
+    failedAttempts['failed'] += 1
+    attemptsRemaining = 3 - failedAttempts['failed']
     print() # Prints blank space.
-    print(Style.BRIGHT + Fore.RED + 'Access denied.' + Style.RESET_ALL) # Prints access denied message in bright red.
+    
+    if failedAttempts['failed'] == 3:
+      print(Fore.RED + 'Denied: ' + Style.RESET_ALL + 'Maximum failed attempts reached, you have been locked out of the terminal.')
+      time.sleep(2)
+      sys.exit()
+      
     print() # Prints a blank space. 
-    print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Incorrect agent number/password entered, try again.') # Prints an error message.
+    print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Incorrect agent number/password entered, try again. You have ' + str(attemptsRemaining) + ' attempts remaining.') # Prints an error message.
     time.sleep(3) # Adds a 3 second delay before the next line of code is executed.
     replit.clear() # Clears the console.
     login() # Calls the login function
