@@ -36,10 +36,10 @@ logging.debug('Variable assignment')
 #--- Variable Assignment
 acceptableAgentNum = ['5','6','7','admin'] # Acceptable inputs for an agent number.
 acceptableDeptPass = ['9', '8','12','adminpass'] # Acceptable inputs for an department password. 
-acceptableReturnMenu = ['Yes', 'yes'] # Acceptable inputs when the user is asked if they want to return to the menu.
-remain = ['No','no'] # Acceptable inputs that will restart the function when the user is asked if they want to return to the menu. 
+acceptableReturnMenu = ['yes'] # Acceptable inputs when the user is asked if they want to return to the menu.
+remain = ['no'] # Acceptable inputs that will restart the function when the user is asked if they want to return to the menu. 
 acceptableMenuOptions = ['1','2','3','4','5', '6'] # Acceptable inputs for the menu options.
-acceptableMenu = ['Menu', 'menu'] # Acceptable inputs, when any one of these are typed into a main input it will return the user back to the menu. 
+acceptableMenu = ['menu'] # Acceptable inputs, when any one of these are typed into a main input it will return the user back to the menu. 
 acceptableBackupMenu = ['1', '2']
 
 failedAttempts = {'failed': 0}
@@ -158,12 +158,12 @@ def unHex(): # Defines the function "unHex"
   
   unHexMenu = input('Would you like to go back to the main menu?: ') # Asks if the user would like to go back to the main menu. 
   #assert isinstance(unHexMenu, str), 'Expecting string!'
-  if unHexMenu in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
+  if unHexMenu.lower() in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
     replit.clear() # Clears the console.
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the menu function.
     
-  elif unHexMenu in remain: # If the user enters "No" or "no" (remain) the following code is executed.
+  elif unHexMenu.lower() in remain: # If the user enters "No" or "no" (remain) the following code is executed.
     print() # Prints a blank space.
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Restarting function, standby.') # Prints a notification message.
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed.
@@ -230,12 +230,12 @@ def asciiHex(): # Defines the function asciiHex
   logging.debug('Requesting menu return input.')
   asciiHexMenu = input('Would you like to go back to the main menu?: ') # Asks if the user would like to go back to the main menu. 
   #assert isinstance(asciiHexMenu, str), 'Expecting string!'
-  if asciiHexMenu in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
+  if asciiHexMenu.lower() in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
     replit.clear() # Clears the console. 
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the menu function.
     
-  elif asciiHexMenu in remain: # If the user enters "No" or "no" (remain) the following code is executed.
+  elif asciiHexMenu.lower() in remain: # If the user enters "No" or "no" (remain) the following code is executed.
     print() # Prints a blank space. 
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Restarting function, standby.') # Prints a notification message.
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
@@ -438,12 +438,12 @@ def backupEvac(): # Defines the function backupEvac
   backupEvacMenu = input('Would you like to go back to the main menu?: ') # Asks if the user would like to go back to the main menu. 
   #assert isinstance(backupEvacMenu, str), 'Expecting string!'
   
-  if backupEvacMenu in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
+  if backupEvacMenu.lower() in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
     replit.clear() # Clears the terminal/console.
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the menu function.
     
-  elif backupEvacMenu in remain: # If the user enters "No" or "no" (remain) the following code is executed.
+  elif backupEvacMenu.lower() in remain: # If the user enters "No" or "no" (remain) the following code is executed.
     print() # Prints a blank space. 
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Restarting function, standby.') # Prints a notification message. 
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
@@ -523,12 +523,12 @@ def ipLocate():
   ipLocateMenu = input('Would you like to go back to the main menu?: ') # Asks if the user would like to go back to the main menu. 
   #assert isinstance(ipLocateMenu, str), 'Expecting string!'
   
-  if ipLocateMenu in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
+  if ipLocateMenu.lower() in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
     replit.clear() # Clears the console.
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the menu function.
     
-  elif ipLocateMenu in remain: # If the user enters "No" or "no" (remain) the following code is executed.
+  elif ipLocateMenu.lower() in remain: # If the user enters "No" or "no" (remain) the following code is executed.
     print() # Prints a blank space. 
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Restarting function, standby.') # Prints a notification message. 
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
@@ -716,12 +716,12 @@ def taxLaunder(): # Defines the function taxLaunder
   taxLaunderMenu = input('Would you like to go back to the main menu?: ') # Asks if the user would like to go back to the main menu. 
   #assert isinstance(taxLaunderMenu, str), 'Expecting string!'
   
-  if taxLaunderMenu in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
+  if taxLaunderMenu.lower() in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
     replit.clear() # Clears the terminal/console.
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the menu function.
     
-  elif taxLaunderMenu in remain: # If the user enters "No" or "no" (remain) the following code is executed.
+  elif taxLaunderMenu.lower() in remain: # If the user enters "No" or "no" (remain) the following code is executed.
     print() # Prints a blank space. 
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Restarting function, standby.') # Prints a notification message. 
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
