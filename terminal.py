@@ -257,7 +257,7 @@ def asciiHex(): # Defines the function asciiHex
   return asciiHexMenu # Returns the function unHexMenu (Exits the function)
 
 def encryptDecodeMenu():
-  os.system('clear')
+  os.system('cls')
   print(launchScreen)
   print(Style.BRIGHT + Fore.BLUE + '1. ' + Style.RESET_ALL + 'Encrypt Messages. ' ) # Prints menu option #1, makes the number blue.
   print(Style.BRIGHT + Fore.BLUE + '2. ' + Style.RESET_ALL + 'Decode Messages. ' ) # Prints menu option #2, makes the number blue.
