@@ -1,8 +1,9 @@
 # FBI-Command-Terminal
-This is an "FBI-Command Terminal" made in Python. This program was made as an assignment for a university preperation computer science course in high-school (ICS3U). 
+This is an "FBI-Command Terminal" made in Python. 
 
 This program has the following features: 
-* Login system that requires an input for the agent number and password. Due to this being a preparation course, there was no use of databases so a list system was used to create the acceptable agent number and password, therefore, agent numbers and passwords can be mixed and matched. 
+* Login system that requires an input for the agent number and password. 
+ * Currently the log-in system uses lists, therefore, different usernames and passwords can be mixed and matched. Currently working on a method to counter-act this.
 
 * Encode ASCII messages into Hexadecimal. 
 * Decode Hexadecimal messages into ASCII. 
