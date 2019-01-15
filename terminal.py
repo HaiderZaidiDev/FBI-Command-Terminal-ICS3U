@@ -532,6 +532,12 @@ def ipLocate():
   ipLocateAsk = input("Please enter the IP Address you would like to locate: ") # Prompts the user to input an IP Address.
   #assert isinstance (ipLocateAsk, str), 'Expecting string!'
   
+  if ipLocateAsk in acceptableMenu:
+    print()
+    os.system('cls')
+    print(launchScreen)
+    menu()
+  
   try: # The program will attempt to run the following code, if an error is given the code under "except:"i will be executed.
    logging.debug('Fetching ip location data from API.')
    for ipCountry in urllib.request.urlopen('https://ipapi.co/' + ipLocateAsk + '/country_name'): # Reads the page source of the url, grabs the country of the ip address given. 
