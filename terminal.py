@@ -7,6 +7,7 @@
 from colorama import init, Fore, Style # Imports Fore and style from Colorama. Allows for colored text. (https://pypi.org/project/colorama/)
 import binascii # Imports Binascii module. Allows for conversion between number systems and ASCII. (https://docs.python.org/3.1/library/binascii.html)
 import sys
+import os
 import replit
 import urllib.request # Imports Urllib.request module, allows for opening urls, reading the page source from urls amongst many other things. (https://docs.python.org/3/library/urllib.request.html#module-urllib.request)
 from termcolor import cprint # Imports cprint from the termcolor module. Allows for bolded, underlined and blinking text. (https://pypi.org/project/termcolor/)
@@ -38,7 +39,7 @@ acceptableAgentNum = ['5','6','7','admin'] # Acceptable inputs for an agent numb
 acceptableDeptPass = ['9', '8','12','adminpass'] # Acceptable inputs for an department password. 
 acceptableReturnMenu = ['yes'] # Acceptable inputs when the user is asked if they want to return to the menu.
 remain = ['no'] # Acceptable inputs that will restart the function when the user is asked if they want to return to the menu. 
-acceptableMenuOptions = ['1','2','3','4','5', '6'] # Acceptable inputs for the menu options.
+acceptableMenuOptions = ['1','2','3','4','5', '6', '7'] # Acceptable inputs for the menu options.
 acceptableMenu = ['menu'] # Acceptable inputs, when any one of these are typed into a main input it will return the user back to the menu. 
 acceptableBackupMenu = ['1', '2']
 
@@ -65,11 +66,11 @@ def menu(): # Defines function menu.
   '''
   logging.debug('Displaying menu output.')
   print() # Prints blank space. 
-  print(Style.BRIGHT + Fore.BLUE + "1. " + Style.RESET_ALL + "Encrypt messages..") # Prints menu option #1, makes the option number blue.
-  print(Style.BRIGHT + Fore.BLUE + "2. "+ Style.RESET_ALL + "Decode encrypted messages.") # Prints menu option #2, makes the option number blue.
-  print(Style.BRIGHT + Fore.BLUE + "3. "+ Style.RESET_ALL + "Request backup/evacuation.") # Prints menu option #3, makes the option number blue.
-  print(Style.BRIGHT + Fore.BLUE + "4. "+ Style.RESET_ALL + "Locate an IP Address.") # Prints menu option #4, makes the option number blue.
-  print(Style.BRIGHT + Fore.BLUE + "5. "+ Style.RESET_ALL + "Detect financial fraud.") # Prints menu option #5, makes the option number blue.
+  print(Style.BRIGHT + Fore.BLUE + "1. " + Style.RESET_ALL + "Encrypt/Decode Messages.") # Prints menu option #1, makes the option number blue.
+  print(Style.BRIGHT + Fore.BLUE + "2. "+ Style.RESET_ALL + "Request backup/evacuation.") # Prints menu option #3, makes the option number blue.
+  print(Style.BRIGHT + Fore.BLUE + "3. "+ Style.RESET_ALL + "Locate an IP Address.") # Prints menu option #4, makes the option number blue.
+  print(Style.BRIGHT + Fore.BLUE + "4. "+ Style.RESET_ALL + "Detect financial fraud.") # Prints menu option #5, makes the option number blue.
+  print(Style.BRIGHT + Fore.BLUE + "5. "+ Style.RESET_ALL + "Create/Find Hidden Messages.")
   print(Style.BRIGHT + Fore.BLUE + "6. "+ Style.RESET_ALL + "Logout.")
   print(Style.BRIGHT + Fore.GREEN + "Note: "+ Style.RESET_ALL + 'If you select the wrong option, type menu in an input to return to the main menu.') # Prints menu option #6, makes the option number blue.
   print() # Prints blank space. 
@@ -89,26 +90,27 @@ def menu(): # Defines function menu.
    logging.debug('Determining menu option selected.')
     #- Menu Option #1 (Decode encrypted messages.).
   elif menuAsk == str('1'): # If the input for menuAsk is 1, the following code is executed.
-    asciiHex() # Calls the function unhex (converts Hexadecimal to ASCII)
+    encryptDecodeMenu() # Calls the function unhex (converts Hexadecimal to ASCII)
     
     #- Menu Option #2 (Encrypt messages.)
   elif menuAsk == str('2'): # If the input for menuAsk is 2, the following code is executed.
-    unHex() # Calls the function asciiHex.
+    backupEvac() # Calls the function asciiHex.
     
     #- Menu Option #3 (Request backup/evacuation)
   elif menuAsk == str('3'): # If the input for menuAsk is 3, the following code is executed.
-    backupEvac() # Calls the function backupEvac. 
+    ipLocate()() # Calls the function backupEvac. 
     
     #- Menu Option #4 (Locate an IP Address.)
   elif menuAsk == str('4'): # If the input for menu ask is 4, the following code is executed.
-    ipLocate() # Calls the function ipLocate.
+    taxLaunder() # Calls the function ipLocate.
     
     #- Menu Option #5 (Detect financial fraud)
-  elif menuAsk == str('5'): # If the input for menu ask is 5, the following code is executed. 
-    taxLaunder() # Calls the function taxLaunder
+  #elif menuAsk == str('5'): # If the input for menu ask is 5, the following code is executed. 
+    #hiddenMessages() # Calls the function taxLaunder
   
   elif menuAsk == str('6'):
     sys.exit()
+    
   #assert isinstance(menuAsk, string), 'Expecting a string!'
     
   return menuAsk # Returns menuAsk (Causes function to exit).
@@ -141,7 +143,7 @@ def unHex(): # Defines the function "unHex"
    print() # Prints blank space. 
   
   except (binascii.Error, UnicodeDecodeError): # If an error message is given when the code under "try:" is ran, the following code will be executed. 
-    if hexInput in acceptableMenu: # If the user types "Menu" or "menu" in hexInput the following code will execute.
+    if hexInput.lower() in acceptableMenu: # If the user types "Menu" or "menu" in hexInput the following code will execute.
      print() # Prints a blank space.
      print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Returning to main menu, standby.') # Prints a notification message.
      time.sleep(3) # Adds a 3 second delay before the next line of code is executed.
@@ -203,14 +205,15 @@ def asciiHex(): # Defines the function asciiHex
    logging.debug('Requesting user input.')
    asciiInput = input("Please enter the message you'd like to encrypt:") # Prompts user for ASCII input.
    #assert isinstance(asciiInput, str), 'Expecting string!'
-   if asciiInput in acceptableMenu: # If the user types "Menu" or "menu" into asciiInput the following code will be executed.
+  
+   if asciiInput.lower() in acceptableMenu: # If the user types "Menu" or "menu" into asciiInput the following code will be executed.
      print() # Prints a blank space.
      print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Returning to main menu, standby.') # Prints a notification message.
      time.sleep(3) # Adds a 3 second delay before the next line of code is executed.
      replit.clear() # Clears the console.
      print() # Prints a blank space.
      print(launchScreen) # Prints the launch screen.
-     menu() # Calls the menu function/
+     menu() # Calls the menu function.
               
    else: # If the user didn't type "Menu" or "menu" in asciiInput the following code is executed. 
     logging.debug('Encoding input.')
@@ -253,6 +256,48 @@ def asciiHex(): # Defines the function asciiHex
     menu() # Calls the menu function
   return asciiHexMenu # Returns the function unHexMenu (Exits the function)
 
+def encryptDecodeMenu():
+  print(Style.BRIGHT + Fore.BLUE + '1. ' + Style.RESET_ALL + 'Encrypt Messages. ' ) # Prints menu option #1, makes the number blue.
+  print(Style.BRIGHT + Fore.BLUE + '2. ' + Style.RESET_ALL + 'Decode Messages. ' ) # Prints menu option #2, makes the number blue.
+  print() # Prints blank message.
+  
+  encryptDecodeAsk = input('What input would you like to select?:')
+    
+  if encryptDecodeAsk.lower() in acceptableMenu: # If the user types "Menu" or "menu" into asciiInput the following code will be executed.
+     print() # Prints a blank space.
+     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Returning to main menu, standby.') # Prints a notification message.
+     time.sleep(3) # Adds a 3 second delay before the next line of code is executed.
+     replit.clear() # Clears the console.
+     print() # Prints a blank space.
+     print(launchScreen) # Prints the launch screen.
+     encryptDecodeMenu() # Calls the menu function.  
+      
+  elif encryptDecodeAsk == str('1'):
+    print() # Prints blank space.
+    os.system('clear') # Clears terminal.
+    time.sleep(1) # Adds a one second delay before the next line is executed.
+    print(launchScreen) # Prints the launch screen.
+    print() # Prints blank message.
+    asciiHex() # Calls function asciiHex.
+    
+  elif encryptDecodeAsk == str('2'):
+    print() # Prints blank space.
+    replit.clear() # Clears terminal
+    time.sleep(1) # Adds a one second delay before the next line is executed.
+    print(launchScreen) # Prints the launch screen.
+    print() # Prints blank message.
+    unHex() # Calls function asciiHex.
+  
+  else:
+    print(Fore.RED + 'Error: ' + Style.RESET_ALL + 'Unacceptable input, restarting function.')
+    time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
+    print() # Prints a blank space.
+    replit.clear() # Clears the console.
+    print() # Prints a blank space.
+    print(launchScreen) # Prints the launch screen
+    menu() # Calls the menu function. 
+  
+
 #--- Request backup/evacuation.
 logging.debug('Start of backup/evac function.')
 def backupEvac(): # Defines the function backupEvac
@@ -282,7 +327,7 @@ def backupEvac(): # Defines the function backupEvac
   backupAsk = input('What option would you like to select?: ') # Asks the user what option they would like to select
   #assert isinstance(backupAsk, str), 'Expecting string!'
   
-  if backupAsk in acceptableMenu: # If the user inputs "Menu" or "menu" for backupAsk the following code is executed, 
+  if backupAsk.lower() in acceptableMenu: # If the user inputs "Menu" or "menu" for backupAsk the following code is executed, 
     print() # Prints a blank space.
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Returning to main menu, standby.') # Notification message.
     time.sleep(3)  # Adds a 3 second delay before the next line of code is executed.
@@ -422,7 +467,7 @@ def backupEvac(): # Defines the function backupEvac
     print() # Prints blank space. 
     print('An evacuation team is on the way, ETA: ' + str(travelTime[0:5]) + ' Hours' ) # Prints the time estimated in hours till the evacuation team arrives. 
     
-  elif backupAsk not in acceptableBackupMenu and acceptableMenu: # If the user doesn't enter a word in either acceptableBackupMenu and acceptableMenu, the following code is executed. 
+  elif backupAsk.lower() not in acceptableBackupMenu and acceptableMenu: # If the user doesn't enter a word in either acceptableBackupMenu and acceptableMenu, the following code is executed. 
     print() # Prints a blank space.
     print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Unacceptable input, restarting function.') # Prints an error message. 
     print() # Prints a blank space.
@@ -662,7 +707,7 @@ def taxLaunder(): # Defines the function taxLaunder
   taxLaunderAsk = input('What option would you like to select?:') # Prompts the user to select an option.
   #assert isinstance(taxLaunderAsk, str), 'Expecting string!'
   
-  if taxLaunderAsk in acceptableMenu: # If the user enters "Menu" or "menu" the following code is executed.
+  if taxLaunderAsk.lower() in acceptableMenu: # If the user enters "Menu" or "menu" the following code is executed.
     print() # Prints a blank space.
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Returning to main menu, standby.') # Prints a notification message.
     time.sleep(3) # Adds a 2 second delay before the next line of code is executed.
