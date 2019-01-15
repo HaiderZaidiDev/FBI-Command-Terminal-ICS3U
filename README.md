@@ -3,7 +3,7 @@ This is an "FBI-Command Terminal" made in Python.
 
 This program has the following features: 
 * Login system that requires an input for the agent number and password. 
-  * Currently the log-in system uses lists, therefore, different usernames and passwords can be mixed and matched. Currently working on a method to counter-act this.
+  * Currently the log-in system uses lists, therefore, different usernames and passwords can be mixed and matched. Actively working on a method to counter-act this.
 
 * Encode ASCII messages into Hexadecimal. 
 * Decode Hexadecimal messages into ASCII. 
