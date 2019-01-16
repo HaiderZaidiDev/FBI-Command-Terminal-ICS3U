@@ -8,13 +8,12 @@ from colorama import init, Fore, Style # Imports Fore and style from Colorama. A
 import binascii # Imports Binascii module. Allows for conversion between number systems and ASCII. (https://docs.python.org/3.1/library/binascii.html)
 import sys
 import os
-import replit
 import urllib.request # Imports Urllib.request module, allows for opening urls, reading the page source from urls amongst many other things. (https://docs.python.org/3/library/urllib.request.html#module-urllib.request)
 from termcolor import cprint # Imports cprint from the termcolor module. Allows for bolded, underlined and blinking text. (https://pypi.org/project/termcolor/)
 from math import radians, cos, sin, sqrt, atan2 # Imports radians, cos, sin, sqrt and atan2 from the math module (https://docs.python.org/3/library/math.html)
 import time # Imports time module. Allows for the delayed printing of text. (https://docs.python.org/3/library/time.html)
 
-init(convert=True)
+#init(convert=True)
 #--- Logging
 import logging
 logging.basicConfig(filename='debug.txt', level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
@@ -83,7 +82,7 @@ def menu(): # Defines function menu.
    print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Unacceptable input, restarting menu.') # Prints error message. 
    time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
    print() # Prints a blank space.
-   replit.clear() # Clears the console.
+   os.system('cls') # Clears the console.
    print() # Prints a blank space.
    print(launchScreen) # Prints the launch screen
    menu() # Calls the menu function. 
@@ -109,7 +108,21 @@ def menu(): # Defines function menu.
     #hiddenMessages() # Calls the function taxLaunder
   
   elif menuAsk == str('6'):
-    sys.exit()
+    logoutConfirm = input(Fore.GREEN + 'Confirm -  ' + Style.RESET_ALL + 'Are you sure you want to logout?')
+    if logoutConfirm.lower() in acceptableReturnMenu:
+      print(Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Logging out, standby.')
+      time.sleep(2)
+      sys.exit()
+    
+    elif logoutConfirm.lower() in remain:
+      print(Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Returning to menu, standby.')
+      time.sleep(2)
+      menu()
+    
+    else:
+      print(Fore.RED + 'Error: ' + Style.RESET_ALL + 'Unacceptable input, returning to menu.')
+      time.sleep(2)
+      menu()
     
   #assert isinstance(menuAsk, string), 'Expecting a string!'
     
@@ -147,21 +160,21 @@ def unHex(): # Defines the function "unHex"
      print() # Prints a blank space.
      print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Returning to main menu, standby.') # Prints a notification message.
      time.sleep(3) # Adds a 3 second delay before the next line of code is executed.
-     replit.clear() # Clears the console.
+     os.system('cls') # Clears the console.
      print() # Prints a blank space.
      print(launchScreen) # Prints the launch screen.
      menu() # Calls the menu function.
     print() # Prints a blank space. 
     print(Style.BRIGHT + Fore.RED + 'Error: ' + Style.RESET_ALL + 'Invalid hexadecimal string entered, restarting function.') # Prints a error message. 
     time.sleep(3) # Adds a 2 second delay before the next line of code is executed. 
-    replit.clear() # Clears the console. 
+    os.system('cls') # Clears the console. 
     print(launchScreen) # Prints the launch screen.
     unHex() # Calls the function unHex
   
   unHexMenu = input('Would you like to go back to the main menu?: ') # Asks if the user would like to go back to the main menu. 
   #assert isinstance(unHexMenu, str), 'Expecting string!'
   if unHexMenu.lower() in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the menu function.
     
@@ -169,7 +182,7 @@ def unHex(): # Defines the function "unHex"
     print() # Prints a blank space.
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Restarting function, standby.') # Prints a notification message.
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed.
-    replit.clear() # Clears the console. 
+    os.system('cls') # Clears the console. 
     print(launchScreen) # Prints the launch screen
     unHex() # Calls the function asciiHex
     
@@ -177,7 +190,7 @@ def unHex(): # Defines the function "unHex"
     print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Unacceptable input, returning to menu.') # Prints an error message.
     print() # Prints a blank space.
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed.
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print() # Prints a blank space.
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the menu funciton.
@@ -210,7 +223,7 @@ def asciiHex(): # Defines the function asciiHex
      print() # Prints a blank space.
      print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Returning to main menu, standby.') # Prints a notification message.
      time.sleep(3) # Adds a 3 second delay before the next line of code is executed.
-     replit.clear() # Clears the console.
+     os.system('cls') # Clears the console.
      print() # Prints a blank space.
      print(launchScreen) # Prints the launch screen.
      menu() # Calls the menu function.
@@ -226,7 +239,7 @@ def asciiHex(): # Defines the function asciiHex
     print() # Prints a blank space. 
     print(Style.BRIGHT + Fore.RED + 'Error: ' + Style.RESET_ALL + 'Invalid hexadecimal string entered, restarting function.') # Prints a error message. 
     time.sleep(3) # Adds a 3 second delay before the next line of code is executed. 
-    replit.clear() # Clears the console. 
+    os.system('cls') # Clears the console. 
     print(launchScreen) # Prints the launch screen.
     unHex() # Calls the function unHex
   
@@ -234,7 +247,7 @@ def asciiHex(): # Defines the function asciiHex
   asciiHexMenu = input('Would you like to go back to the main menu?: ') # Asks if the user would like to go back to the main menu. 
   #assert isinstance(asciiHexMenu, str), 'Expecting string!'
   if asciiHexMenu.lower() in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
-    replit.clear() # Clears the console. 
+    os.system('cls') # Clears the console. 
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the menu function.
     
@@ -242,7 +255,7 @@ def asciiHex(): # Defines the function asciiHex
     print() # Prints a blank space. 
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Restarting function, standby.') # Prints a notification message.
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print(launchScreen) # Prints the launch screen.
     asciiHex() # Calls the function asciiHex
     
@@ -250,7 +263,7 @@ def asciiHex(): # Defines the function asciiHex
     print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Unacceptable input, returning to menu.') # Prints an error message.
     print() #  Prints a blank nessage.
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed.
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print() # Prints a blank space.
     print(launchScreen) # Prints the launchScreen
     menu() # Calls the menu function
@@ -269,7 +282,7 @@ def encryptDecodeMenu():
      print() # Prints a blank space.
      print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Returning to main menu, standby.') # Prints a notification message.
      time.sleep(3) # Adds a 3 second delay before the next line of code is executed.
-     replit.clear() # Clears the console.
+     os.system('cls') # Clears the console.
      print() # Prints a blank space.
      print(launchScreen) # Prints the launch screen.
      menu() # Calls the menu function.  
@@ -284,7 +297,7 @@ def encryptDecodeMenu():
     
   elif encryptDecodeAsk == str('2'):
     print() # Prints blank space.
-    replit.clear() # Clears terminal
+    os.system('cls') # Clears terminal
     time.sleep(1) # Adds a one second delay before the next line is executed.
     print(launchScreen) # Prints the launch screen.
     print() # Prints blank message.
@@ -294,7 +307,7 @@ def encryptDecodeMenu():
     print(Fore.RED + 'Error: ' + Style.RESET_ALL + 'Unacceptable input, restarting function.')
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
     print() # Prints a blank space.
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print() # Prints a blank space.
     print(launchScreen) # Prints the launch screen
     menu() # Calls the menu function. 
@@ -333,7 +346,7 @@ def backupEvac(): # Defines the function backupEvac
     print() # Prints a blank space.
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Returning to main menu, standby.') # Notification message.
     time.sleep(3)  # Adds a 3 second delay before the next line of code is executed.
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print() # Prints a blank space.
     print(launchScreen) # Prints the launchScreen.
     menu() # Calls the menu function
@@ -475,7 +488,7 @@ def backupEvac(): # Defines the function backupEvac
     print() # Prints a blank space.
     time.sleep(2)# Adds a 2 second delay before the next line of code is executed. 
     print() # Prints a blank space. 
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print(launchScreen) # Prints the launchScreen
     backupEvac() # Calls the function backupEvac.
   print() # Prints a blank space. 
@@ -486,7 +499,7 @@ def backupEvac(): # Defines the function backupEvac
   #assert isinstance(backupEvacMenu, str), 'Expecting string!'
   
   if backupEvacMenu.lower() in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
-    replit.clear() # Clears the terminal/console.
+    os.system('cls') # Clears the terminal/console.
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the menu function.
     
@@ -494,7 +507,7 @@ def backupEvac(): # Defines the function backupEvac
     print() # Prints a blank space. 
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Restarting function, standby.') # Prints a notification message. 
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print(launchScreen) # Prints the launch screen.
     backupEvac() # Calls the function backupEvac
     
@@ -503,7 +516,7 @@ def backupEvac(): # Defines the function backupEvac
     print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Unacceptable input, returning to menu.') # Prints an error message.
     print() # Prints a blank message.
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed.
-    replit.clear() # Clears the onsole.
+    os.system('cls') # Clears the onsole.
     print() # Prints a blank space
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the function menu.
@@ -561,7 +574,7 @@ def ipLocate():
     print() # Prints a blank space. 
     print(Style.BRIGHT + Fore.RED + 'Error: ' + Style.RESET_ALL + 'Invalid IP Address entered, restarting function.') # Prints a error message. 
     time.sleep(3) # Adds a 2 second delay before the next line of code is executed. 
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print(launchScreen) # Prints the launch screen.
     ipLocate() # Calls the function ipLocate
  
@@ -577,7 +590,7 @@ def ipLocate():
   #assert isinstance(ipLocateMenu, str), 'Expecting string!'
   
   if ipLocateMenu.lower() in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the menu function.
     
@@ -585,7 +598,7 @@ def ipLocate():
     print() # Prints a blank space. 
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Restarting function, standby.') # Prints a notification message. 
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print(launchScreen) # Prints the launch screen.
     ipLocate() # Calls the function ipLocate
     
@@ -594,7 +607,7 @@ def ipLocate():
     print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Unacceptable input, returning to menu.') # Prints an error message.
     print() # Prints a blank message.
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed.
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print() # Prints a blank space.
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the function menu.
@@ -719,7 +732,7 @@ def taxLaunder(): # Defines the function taxLaunder
     print() # Prints a blank space.
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Returning to main menu, standby.') # Prints a notification message.
     time.sleep(3) # Adds a 2 second delay before the next line of code is executed.
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print() # Prints a blank message.
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the menu function. 
@@ -736,7 +749,7 @@ def taxLaunder(): # Defines the function taxLaunder
       print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Unacceptable input, restarting function.') # Prints error message. 
       time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
       print() # Prints a blank message.
-      replit.clear() # Clears the console.
+      os.system('cls') # Clears the console.
       print() # Prints a blank message.
       print(launchScreen) # Prints the launchScreen
       taxLaunder() # Calls the taxLaunder function. 
@@ -751,7 +764,7 @@ def taxLaunder(): # Defines the function taxLaunder
       print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Unacceptable input, restarting function.') # Prints an error message. 
       time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
       print() # Prints a blank space.
-      replit.clear() # Clears the console.
+      os.system('cls') # Clears the console.
       print() # Prints a blank space.
       print(launchScreen) # Prints the launchScreen
       taxLaunder() # Calls the taxLaunder function. 
@@ -760,7 +773,7 @@ def taxLaunder(): # Defines the function taxLaunder
    print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Unacceptable input, restarting function.') # Prints an error message. 
    time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
    print() # Prints a blank message.
-   replit.clear() # Clears the console.
+   os.system('cls') # Clears the console.
    print() # Prints a blank message.
    print(launchScreen) # Prints the launchScreen
    taxLaunder() # Calls the taxLaunder function. 
@@ -770,7 +783,7 @@ def taxLaunder(): # Defines the function taxLaunder
   #assert isinstance(taxLaunderMenu, str), 'Expecting string!'
   
   if taxLaunderMenu.lower() in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
-    replit.clear() # Clears the terminal/console.
+    os.system('cls') # Clears the terminal/console.
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the menu function.
     
@@ -778,7 +791,7 @@ def taxLaunder(): # Defines the function taxLaunder
     print() # Prints a blank space. 
     print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Restarting function, standby.') # Prints a notification message. 
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     print(launchScreen) # Prints the launch screen.
     taxLaunder() # Calls the function taxLaunder
     
@@ -787,7 +800,7 @@ def taxLaunder(): # Defines the function taxLaunder
     print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Unacceptable input, returning to menu.') # Prints an error message.
     print() # Prints a blank message.
     time.sleep(2) # Adds a 2 second delay before the next line of code is executed.
-    replit.clear() # Clears the terminal/console.
+    os.system('cls') # Clears the terminal/console.
     print() # Prints a blank space.
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the function menu.
@@ -817,16 +830,23 @@ def login():  # Defines the function login.
   agentNum = input('Agent Number:') # Prompts user to input their agent number.
   #assert isinstance(agentNum, str), 'Expecting string!'
   deptPass = input('Dept. Password:') # Prompts user to input their department password. 
-  #assert isinstance(deptPass, str), 'Expecting string!'
+  deptPassUTF = deptPass.encode('utf-8') 
+  deptPassHex = binascii.hexlify(deptPassUTF).decode('utf-8')
+  
 
-  if agentNum in acceptableAgentNum and deptPass in acceptableDeptPass: # If the inputted login information is in the system, the following code is executed.
+  loginInfo = agentNum + ':' + deptPassHex
+  userData = open('userdata.txt', 'r')
+  userDataContent = userData.read()
+  
+
+  if loginInfo in userDataContent:
     print() # Prints blank space.
     print(Style.BRIGHT + Fore.GREEN + 'Access granted.' + Style.RESET_ALL) # Prints access granted message in bright green.
     print() # Prints blank space.
     print('Welcome back agent ' + str(agentNum) +'!') # Prints welcome message based upon the inputted agent number.
     menu() # Calls the menu function.
-    
-  else: # If the inputted login information is not in the system, the following code is executed.
+  
+  else: 
     failedAttempts['failed'] += 1
     attemptsRemaining = 3 - failedAttempts['failed']
     print() # Prints blank space.
@@ -835,12 +855,13 @@ def login():  # Defines the function login.
       print(Fore.RED + 'Denied: ' + Style.RESET_ALL + 'Maximum failed attempts reached, you have been locked out of the terminal.')
       time.sleep(2)
       sys.exit()
-      
+    
     print() # Prints a blank space. 
     print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Incorrect agent number/password entered, try again. You have ' + str(attemptsRemaining) + ' attempts remaining.') # Prints an error message.
     time.sleep(3) # Adds a 3 second delay before the next line of code is executed.
-    replit.clear() # Clears the console.
+    os.system('cls') # Clears the console.
     login() # Calls the login function
+
     
 login() # Calls the login function
    
