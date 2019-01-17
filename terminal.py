@@ -14,7 +14,7 @@ from termcolor import cprint # Imports cprint from the termcolor module. Allows 
 from math import radians, cos, sin, sqrt, atan2 # Imports radians, cos, sin, sqrt and atan2 from the math module (https://docs.python.org/3/library/math.html)
 import time # Imports time module. Allows for the delayed printing of text. (https://docs.python.org/3/library/time.html)
 
-#init(convert=True)
+init(convert=True)
 #--- Logging
 import logging
 logging.basicConfig(filename='debug.txt', level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
