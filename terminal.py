@@ -8,6 +8,7 @@ from colorama import init, Fore, Style # Imports Fore and style from Colorama. A
 import binascii # Imports Binascii module. Allows for conversion between number systems and ASCII. (https://docs.python.org/3.1/library/binascii.html)
 import sys
 import os
+import random
 import urllib.request # Imports Urllib.request module, allows for opening urls, reading the page source from urls amongst many other things. (https://docs.python.org/3/library/urllib.request.html#module-urllib.request)
 from termcolor import cprint # Imports cprint from the termcolor module. Allows for bolded, underlined and blinking text. (https://pypi.org/project/termcolor/)
 from math import radians, cos, sin, sqrt, atan2 # Imports radians, cos, sin, sqrt and atan2 from the math module (https://docs.python.org/3/library/math.html)
@@ -103,12 +104,17 @@ def menu(): # Defines function menu.
   elif menuAsk == str('4'): # If the input for menu ask is 4, the following code is executed.
     taxLaunder() # Calls the function ipLocate.
     
-    #- Menu Option #5 (Detect financial fraud)
-  #elif menuAsk == str('5'): # If the input for menu ask is 5, the following code is executed. 
-    #hiddenMessages() # Calls the function taxLaunder
+    #- Menu Option #5 (Create/Find Hidden Mes)
+  elif menuAsk == str('5'): # If the input for menu ask is 5, the following code is executed. 
+    hiddenMessages() # Calls the function hiddenMessages()
   
   elif menuAsk == str('6'):
-    logoutConfirm = input(Fore.GREEN + 'Confirm -  ' + Style.RESET_ALL + 'Are you sure you want to logout?')
+    logoutConfirm = input(Fore.GREEN + 'Confirm -  ' + Style.RESET_ALL + 'Are you sure you want to logout?\n')
+    if logoutConfirm == str(''):
+      print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Logging out, standby.')
+      time.sleep(2)
+      sys.exit()
+      
     if logoutConfirm.lower() in acceptableReturnMenu:
       print(Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Logging out, standby.')
       time.sleep(2)
@@ -720,6 +726,7 @@ def taxLaunder(): # Defines the function taxLaunder
   taxLaunderMenu
     The input of taxLaunderMenu
   '''
+  
   logging.debug('Outputting financial fraud menu.')
   print(Style.BRIGHT + Fore.BLUE + '1. ' + Style.RESET_ALL + 'Detect tax evasion. ' ) # Prints menu option #1, makes the number blue.
   print(Style.BRIGHT + Fore.BLUE + '2. ' + Style.RESET_ALL + 'Detect money laundering. ' ) # Prints menu option #2, makes the number blue.
@@ -805,6 +812,148 @@ def taxLaunder(): # Defines the function taxLaunder
     print(launchScreen) # Prints the launch screen.
     menu() # Calls the function menu.
   return taxLaunderMenu # Returns taxLaunderMenu (Exits the function)
+
+#--- Create/Find Hidden Messages Menu
+def hiddenMessages():
+  print(Style.BRIGHT + Fore.BLUE + "1. " + Style.RESET_ALL + "Create a hidden message.") # Prints menu option #1, makes the option number blue.
+  print(Style.BRIGHT + Fore.BLUE + "2. "+ Style.RESET_ALL + "Find a hidden message.") # Prints menu option #3, makes the option number blue.
+  hiddenAsk = input('\nWhat option would you like to select?: ')
+  
+  if hiddenAsk in acceptableMenu:
+    print(Fore.GREEN + 'Notification: ' + Style.RESET_ALL +'Returning to menu, standby.')
+    time.sleep(2)
+    os.system('cls')
+  
+  elif hiddenAsk == str('1'):
+    os.system('cls')
+    print(launchScreen)
+    createMessage()
+  
+  elif hiddenAsk == str('2'):
+    os.system('cls')
+    print(launchScreen)
+    findMessages()
+  
+  else:
+    print(Fore.RED + 'Error: ' + Style.RESET_ALL + 'Unacceptable input, returning to menu.')
+    
+#--- Create hidden messages.  
+def createMessage():
+  #--- Rewrites original Romeo and Juliet to storyEdit, clears hiddenOutput. 
+  with open('storyMaster.txt', 'r') as storyMaster:
+    storyMasterContents = storyMaster.readlines()
+    storyMaster.close()
+    
+  rewrite = ''
+  for data in storyMasterContents:
+    rewrite += data
+  
+  with open('story.txt', 'w') as storyEdit: # Rewrites storyMaster in storyEdit
+    storyEdit.write(rewrite)
+    storyEdit.close()
+  
+  with open('hiddenOutput.txt', 'w') as hiddenOutput: # clears story Output
+    hiddenOutput.write('')
+    hiddenOutput.close()
+
+  
+  #---
+  
+  hiddenAsk = input('What message would you like to hide?: ')
+  randomNum = random.randint(1, len(storyMasterContents))
+  
+  with open('story.txt', 'a') as storyAppend: # Appends hidden message to story
+    storyAppend.write('\n' + hiddenAsk.capitalize() + '. \n')
+    storyAppend.close()
+    
+  storyRead = open('story.txt', 'r')
+  storyReadContents = storyRead.readlines()
+
+  lastLine = len(storyReadContents) - 1
+
+  storyReadContents[lastLine], storyReadContents[randomNum] = storyReadContents[randomNum], storyReadContents[lastLine]
+
+# copies story.txt and pastes in hiddenOutput
+  new = ''
+  for lines in storyReadContents:
+    new += lines
+
+  with open('hiddenOutput.txt', 'w') as hiddenOutput:
+    hiddenOutput.write(new)
+    os.fsync(hiddenOutput)
+    hiddenOutput.close()
+  
+  
+  print(Style.BRIGHT + Fore.GREEN + 'Success: ' + Style.RESET_ALL + 'Your message has been hidden in the contents of the file "hiddenOutput.txt"')
+  
+  createMessageAsk = input('\nWould you like to go back to the main menu?:')
+  if createMessageAsk.lower() in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
+    os.system('cls') # Clears the terminal/console.
+    print(launchScreen) # Prints the launch screen.
+    menu() # Calls the menu function.
+    
+  elif createMessageAsk.lower() in remain: # If the user enters "No" or "no" (remain) the following code is executed.
+    print() # Prints a blank space. 
+    print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Restarting function, standby.') # Prints a notification message. 
+    time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
+    os.system('cls') # Clears the console.
+    print(launchScreen) # Prints the launch screen.
+    hiddenMessages() # Calls the function taxLaunder
+    
+  else: # If the user's input isn't in acceptableReturnMenu or remain the following code is executed.
+    print() # Prints a blank space. 
+    print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Unacceptable input, returning to menu.') # Prints an error message.
+    print() # Prints a blank message.
+    time.sleep(2) # Adds a 2 second delay before the next line of code is executed.
+    os.system('cls') # Clears the terminal/console.
+    print() # Prints a blank space.
+    print(launchScreen) # Prints the launch screen.
+    menu() # Calls the function menu.
+  return createMessageAsk # Returns createMessageAsk (Exits the function)
+  
+#--- Find hidden messages.
+def findMessages():
+  print('''To find the hidden message, copy and paste the text into the file "hiddenOutput.txt".''')
+  hiddenAsk = input('\n' + Fore.GREEN + 'Confirm: ' + Style.RESET_ALL + '''Press enter once you have pasted to the file:''')
+
+  if hiddenAsk == str(''):
+    with open('storyMaster.txt', 'r') as storyMaster:
+      with open('hiddenMessageInput.txt', 'r') as hiddenInput:
+        storyMasterContents = storyMaster.readlines()
+        hiddenInputContents = hiddenInput.readlines()
+
+    for i in range(0, len(storyMasterContents) - 1, 1):
+      if storyMasterContents[i] != hiddenInputContents[i]:
+        print('Hidden Message: ' + hiddenInputContents[i])
+  
+  findMessageAsk = input('\nWould you like to go back to the main menu?:')
+  if findMessageAsk.lower() in acceptableReturnMenu: # If the user enters "Yes" or "yes" (acceptableReturnMenu) the following code is executed.
+    os.system('cls') # Clears the terminal/console.
+    print(launchScreen) # Prints the launch screen.
+    menu() # Calls the menu function.
+    
+  elif findMessageAsk.lower() in remain: # If the user enters "No" or "no" (remain) the following code is executed.
+    print() # Prints a blank space. 
+    print(Style.BRIGHT + Fore.GREEN + 'Notification: ' + Style.RESET_ALL + 'Restarting function, standby.') # Prints a notification message. 
+    time.sleep(2) # Adds a 2 second delay before the next line of code is executed. 
+    os.system('cls') # Clears the console.
+    print(launchScreen) # Prints the launch screen.
+    hiddenMessages() # Calls the function taxLaunder
+    
+  else: # If the user's input isn't in acceptableReturnMenu or remain the following code is executed.
+    print() # Prints a blank space. 
+    print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Unacceptable input, returning to menu.') # Prints an error message.
+    print() # Prints a blank message.
+    time.sleep(2) # Adds a 2 second delay before the next line of code is executed.
+    os.system('cls') # Clears the terminal/console.
+    print() # Prints a blank space.
+    print(launchScreen) # Prints the launch screen.
+    menu() # Calls the function menu.
+  return findMessageAsk # Returns findMessageAsk (Exits the function)
+
+  
+  
+  
   
 #--- Login Validator
 logging.debug('Start of function login.')
