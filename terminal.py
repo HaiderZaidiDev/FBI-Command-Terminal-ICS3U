@@ -913,8 +913,8 @@ def createMessage():
   
 #--- Find hidden messages.
 def findMessages():
-  print('''To find the hidden message, copy and paste the text into the file "hiddenOutput.txt".''')
-  hiddenAsk = input('\n' + Fore.GREEN + 'Confirm: ' + Style.RESET_ALL + '''Press enter once you have pasted to the file:''')
+  print('''To find the hidden message, copy and paste the text into the file "hiddenMessageInput.txt".''')
+  hiddenAsk = input('\n' + Fore.GREEN + 'Confirm - ' + Style.RESET_ALL + '''Press enter once you have pasted to the file:''')
 
   if hiddenAsk == str(''):
     with open('storyMaster.txt', 'r') as storyMaster:
