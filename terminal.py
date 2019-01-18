@@ -577,7 +577,14 @@ def ipLocate():
     print(launchScreen)
     menu()
 
-  try: # The program will attempt to run the following code, if an error is given the code under "except:"i will be executed.
+  elif ipLocateAsk.isspace() or ipLocateAsk == str(''):
+    print(Style.BRIGHT + Fore.RED + 'Error: ' + Style.RESET_ALL + 'No IP Address entered, restarting function.')
+    time.sleep(2)
+    os.system('cls')
+    print(launchScreen)
+    ipLocate()
+
+  try: # The program will attempt to run the following code, if an error is given the code under "except:" will be executed.
    logging.debug('Fetching ip location data from API.')
    for ipCountry in urllib.request.urlopen('https://ipapi.co/' + ipLocateAsk + '/country_name'): # Reads the page source of the url, grabs the country of the ip address given.
      ipCountryOutput = ipCountry.decode('utf-8') # Decodes the country name to avoid unwanted prefixes.
@@ -1010,18 +1017,20 @@ def login():  # Defines the function login.
   -------
   none
   '''
+
   print(launchScreen) # Prints the launchscreen.
 #--- Agent Login
   agentNum = input('Agent Number:') # Prompts user to input their agent number.
   #assert isinstance(agentNum, str), 'Expecting string!'
-  deptPass = input('Dept. Password:') # Prompts user to input their department password.
+  deptPass = input('Dept. Password:').strip(' ') # Prompts user to input their department password.
   deptPassUTF = deptPass.encode('utf-8')
   deptPassHex = binascii.hexlify(deptPassUTF).decode('utf-8')
 
 
-  loginInfo = agentNum + ':' + deptPassHex
+  loginInfo = agentNum.strip(' ') + ':' + deptPassHex.strip(' ')
   userData = open('userdata.txt', 'r')
   userDataContent = userData.read()
+  userData.close()
 
 
   if loginInfo in userDataContent:
@@ -1040,6 +1049,14 @@ def login():  # Defines the function login.
       print(Fore.RED + 'Denied: ' + Style.RESET_ALL + 'Maximum failed attempts reached, you have been locked out of the terminal.')
       time.sleep(2)
       sys.exit()
+
+    if agentNum.isupper() or deptPass.isupper():
+        print() # Prints a blank space.
+        print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Incorrect agent number/password entered, try again. You have ' + str(attemptsRemaining) + ' attempts remaining.' + Style.BRIGHT + Fore.GREEN + '\nNote: ' + Style.RESET_ALL + 'It appears that your capslock is on, if this is a mistake make sure to disable it!') # Prints an error message.
+        time.sleep(4) # Adds a 3 second delay before the next line of code is executed.
+        os.system('cls') # Clears the console.
+        login() # Calls the login function
+
 
     print() # Prints a blank space.
     print(Fore.RED + 'Error: ' + Style.RESET_ALL +  'Incorrect agent number/password entered, try again. You have ' + str(attemptsRemaining) + ' attempts remaining.') # Prints an error message.
