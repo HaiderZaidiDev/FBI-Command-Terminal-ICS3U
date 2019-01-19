@@ -22,4 +22,5 @@ This is an "FBI-Command Terminal" made in Python.
 
 ## Installation
 * To download the FBI-Command-Terminal, simply download the repository as a zip and extract the files to a location of your choosing. Once you have extracted the files, navigate to the FBI-Command-Terminal.exe located in the file path /Data/dist and run it to launch the terminal.
+
   * Running the .exe may trigger an anti-virus, preventing the terminal from being ran. I provided an .exe so you don't have to manually install the libraries used in the program, however, if you would like to validate the legitmacy of the program, or would rather run it directly from the source, I have included a .py file in the same file path. Before running the .py file it is suggested that you install the libraries imported in the file to ensure everything runs smoothly. 
