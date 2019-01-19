@@ -897,8 +897,8 @@ def hiddenMessages():
   '''
   Sub-menu for creating/finding a hidden message.
 
-  This function provides displays a sub-menu of options related to creating and or finding a hidden message in a piece of text,
-  specifically in Romeo and Juluet
+  This function displays a sub-menu of options related to creating and or finding a hidden message in a piece of text,
+  specifically in Romeo and Juluet.
 
   Parameters
   ----------
@@ -908,10 +908,6 @@ def hiddenMessages():
   -------
   string
     The input of hiddenMenuAsk.
-
-  Raises (this section is only applicable if your function raises an exception)
-  ------
-  none
   '''
   logging.debug('Displaying menu options.')
   print(Style.BRIGHT + Fore.BLUE + "1. " + Style.RESET_ALL + "Create a hidden message.") # Prints menu option #1, makes the option number blue.
@@ -966,7 +962,7 @@ def createMessage():
         The input of createMessageAsk
 
 
-      Raises (this section is only applicable if your function raises an exception)
+      Raises 
       ------
       Exception
         Raised when the message the user would like to hide is, or less than 2 words.
@@ -1088,10 +1084,6 @@ def findMessages(): # Defines function findMessages.
       -------
       string
         The input of findMessageAsk
-
-      Raises (this section is only applicable if your function raises an exception)
-      ------
-      none
   '''
   with open('hiddenMessageInput.txt', 'w') as hiddenMessageInputOutput: # clears story Output
     hiddenMessageInputOutput.write('') # Writes all contents from hiddenMessageInputOutput.txt
