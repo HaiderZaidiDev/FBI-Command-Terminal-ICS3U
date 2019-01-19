@@ -12,4 +12,6 @@ This program has the following features:
 * Detect financial fraud. 
   * Ability to detect tax evasion. Contrasts the tax rate inputted by the agent with the amount of taxes an entity has paid, determines if said entity paid the right amount of taxes based upon the tax rate inputted by the agent and if they did not pay the right amount, how much they were under/over. 
   * Ability to detect money laundering. Uses the basic account formula (Revenue - Expenses = Net Income), contrasts the net income figure and the difference from the formula to determine if they were any discrepencies, this may not always be accurate in terms of determining money laundering as a simple mistake could have been made in the accounting proccess. 
-  
+* Create/find hidden messages in a text.
+  * Ability to hide a message, based upon the users input in a random line of Romeo and Juliet. 
+  * Ability to find a hidden message in Romeo and Juliet based upon the users input (contrasts the users input to a file with a master copy of Romeo and Juliet and outputs the differences). 
