@@ -1,14 +1,17 @@
 # FBI-Command-Terminal
 This is an "FBI-Command Terminal" made in Python. 
 
-This program has the following features: 
-* A login system that takes input in the form of an agent number and departmental password. 
-  * The login system scans the file userData to determine the if the agent number and departmental password were correct. Passwords stored in the userData file are encryped in hexadecimals. 
+## Features
+* A GUI (Graphical-User-Interface) based login system that requires credentials from the user in terms of the Agent Number and Department Password.  
+  * The login system scans the file userdata.txt to determine if the credentials inputted by the user is valid. If the credentials are invalid, an error message is given. The user can make a maximum of 3 failed login attempts before their locked out of the terminal.
 
 * Encode ASCII messages into Hexadecimal. 
 * Decode Hexadecimal messages into ASCII. 
-* Request backup/evacuation; This uses an API to determine the users IP address which then determines their geolocation and approximate longitude and lattiude cordinates, said cordinates are then used in the Haversine formula (a formula to calculate the distance between two cordinates) in partnership with the cordinates for the FBI headquarters to determine the approximate distance between the "agent" using the command terminal and the FBI Headquarters. In addition to determining the distance between the agent and the FBI headquarters, this program will also determine the time it would take to reach the agent, under the assumption that the backup and or evacuation team is travelling at 100Km/h. 
-* Locate an IP Address. Works similar to the previous function, however, requires an input in the form of an IP Address from the agent. Using the previously mentioned API, information in regards to the approximate geo location of the IP Address is determined. 
+* Request backup/evacuation
+  * The backup/evacuation function uses an API to determine the users IP Address. Then, using the IP Address and the previously mentioned API, the users geolocation and approximate cordinates (in terms of longitude and lattitude are determined). Following, the Haversine formula (a formula used to determine the distance between a pair of lattitude and longitude points) is used to determine the distance the Agent (user) is away from the FBI Head Quarters (Washington D.C) in killometers. This also provides an approximate time figure for when the backup and or evacuation team would arrive, by taking the distance figure and dividing it by 100, acting under the assumption that the backup/evacuation team is travelling at a speed of 100Km/h. 
+  
+* Locate an IP Address. 
+  * Uses an API to determine the approximate geo location and cordinates of an IP address inputted by the user.  
 * Detect financial fraud. 
   * Ability to detect tax evasion. Contrasts the tax rate inputted by the agent with the amount of taxes an entity has paid, determines if said entity paid the right amount of taxes based upon the tax rate inputted by the agent and if they did not pay the right amount, how much they were under/over. 
   * Ability to detect money laundering. Uses the basic account formula (Revenue - Expenses = Net Income), contrasts the net income figure and the difference from the formula to determine if they were any discrepencies, this may not always be accurate in terms of determining money laundering as a simple mistake could have been made in the accounting proccess. 
