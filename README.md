@@ -3,7 +3,7 @@ This is an "FBI-Command Terminal" made in Python.
 
 ## Features
 * A GUI (Graphical-User-Interface) based login system that requires credentials from the user in terms of the Agent Number and Department Password.  
-  * The login system scans the file userdata.txt to determine if the credentials inputted by the user is valid. If the credentials are invalid, an error message is given. The user can make a maximum of 3 failed login attempts before their locked out of the terminal.
+  * The login system scans the file userdata.txt to determine if the credentials inputted by the user were valid. If the credentials inputted weree invalid, an error message is given. The user can make a maximum of 3 failed login attempts before they're locked out of the terminal.
 
 * Encode ASCII messages into Hexadecimal. 
 * Decode Hexadecimal messages into ASCII. 
@@ -18,3 +18,8 @@ This is an "FBI-Command Terminal" made in Python.
 * Create/find hidden messages in a text.
   * Ability to hide a message, based upon the users input in a random line of Romeo and Juliet. 
   * Ability to find a hidden message in Romeo and Juliet based upon the users input (contrasts the users input to a file with a master copy of Romeo and Juliet and outputs the differences). 
+  
+
+## Installation
+* To download the FBI-Command-Terminal, simply download the repository as a zip and extract the files to a location of your choosing. Once you have extracted the files, navigate to the FBI-Command-Terminal.exe located in the file path /Data/dist and run it to launch the terminal.
+  ** Note: Running the .exe may trigger an anti-virus, preventing the terminal from being ran. I provided an .exe so you don't have to manually install the libraries used in the program, however, if you would like to validate the legitmacy of the program, or would rather run it directly from the source, I have included a .py file in the same file path. Before running the .py file it is suggested that you install the libraries imported in the file to ensure everything runs smoothly. 
