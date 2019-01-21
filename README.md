@@ -1,3 +1,5 @@
+
+![Logo](https://i.imgur.com/QD1WPF9.png)
 # FBI-Command-Terminal
 This is an "FBI-Command Terminal" made in Python. 
 
